@@ -16,7 +16,7 @@ export class DataStorageService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private serverUrl = environment.serverUrl + '/recipes'; // URL to web api
-    private serverUrl2 = environment.serverUrl + '/shopping-list/';
+    private shoppingListServerUrl = environment.serverUrl + '/shopping-list/';
 
   constructor(private http: Http, private recipeService: RecipeService, private shoppingListService: ShoppingListService) {}
 
@@ -26,7 +26,7 @@ export class DataStorageService {
 
 
     storeShoppingList() {
-        return this.http.put(this.serverUrl2, this.shoppingListService.getIngredients());
+        return this.http.put(this.shoppingListServerUrl, this.shoppingListService.getIngredients());
     }
 
     getRecipes() {
@@ -50,7 +50,7 @@ export class DataStorageService {
     }
 
     getShoppingList() {
-        this.http.get(this.serverUrl2)
+        this.http.get(this.shoppingListServerUrl)
             .map(
                 (response) => {
                     const shopping_list = response.json();
@@ -73,7 +73,7 @@ export class DataStorageService {
       ingredient = this.shoppingListService.getIngredient(1)
         
         const body = {'name': name, 'amount': amount};
-        this.http.put(this.serverUrl2 + ingredient._id, body)
+        this.http.put(this.shoppingListServerUrl + ingredient._id, body)
             .map(
                 (response) => {
                     const shopping_list = response.json();
