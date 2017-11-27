@@ -34,13 +34,14 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateIngredient(index: number, newIngredient: Ingredient) {
-
+  updateIngredient( newIngredient: Ingredient) {
+    const index = this.ingredients.findIndex( i => i._id === newIngredient._id);
     this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  deleteIngredient(index: number) {
+  deleteIngredient(ingredient: Ingredient) {
+    const index = this.ingredients.findIndex( i => i._id === ingredient._id);
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
   }

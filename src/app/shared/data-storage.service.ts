@@ -64,14 +64,28 @@ export class DataStorageService {
             );
     }
 
+    postShoppinglist(ingredient : Ingredient) {
+
+        this.http.post(this.shoppingListServerUrl, ingredient)
+            .map(
+                (response) => {
+                    const shopping_list = response.json();
+                    console.log(shopping_list);
+                    return shopping_list;
+                }
+            )
+            .subscribe((shopping_list) => {
+                this.shoppingListService.addIngredient(shopping_list)
+            })
+    }
+
     updateShoppingList(ingredient) {
 
       const amount = ingredient.amount;
       const name = ingredient.name;
 
       console.log(ingredient._id);
-      ingredient = this.shoppingListService.getIngredient(1)
-        
+
         const body = {'name': name, 'amount': amount};
         this.http.put(this.shoppingListServerUrl + ingredient._id, body)
             .map(
@@ -82,7 +96,21 @@ export class DataStorageService {
                 }
             )
             .subscribe((shopping_list) => {
-            this.shoppingListService.updateIngredient(1, shopping_list);
+            this.shoppingListService.updateIngredient(shopping_list);
+            })
+    }
+
+    deleteShoppingList(ingredient) {
+        this.http.delete(this.shoppingListServerUrl + ingredient._id)
+            .map(
+                (response) => {
+                    const shopping_list = response.json();
+                    console.log(shopping_list);
+                    return shopping_list;
+                }
+            )
+            .subscribe((shopping_list) => {
+                this.shoppingListService.deleteIngredient(shopping_list)
             })
     }
 }
