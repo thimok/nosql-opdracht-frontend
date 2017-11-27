@@ -69,7 +69,7 @@ export class DataStorageService {
       const amount = ingredient.amount;
       const name = ingredient.name;
 
-      console.log(ingredient._i);
+      console.log(ingredient._id);
       ingredient = this.shoppingListService.getIngredient(1)
         
         const body = {'name': name, 'amount': amount};
