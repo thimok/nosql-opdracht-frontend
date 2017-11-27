@@ -12,7 +12,7 @@ import {DataStorageService} from "../../shared/data-storage.service";
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
-  id: number;
+  id: string;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class RecipeDetailComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = +params['id'];
+          this.id = params['id'];
           this.recipe = this.recipeService.getRecipe(this.id);
         }
       );
@@ -41,7 +41,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    this.storageService.deleteRecipe(this.id);
     this.router.navigate(['/recipes']);
   }
 

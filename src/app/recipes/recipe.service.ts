@@ -33,7 +33,8 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipe(index: number) {
+  getRecipe(id: string) {
+    const index = this.recipes.findIndex(x => x._id == id);
     return this.recipes[index];
   }
 
@@ -51,13 +52,15 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
 
+  updateRecipe(newRecipe: Recipe) {
+    const index = this.recipes.findIndex(x => x._id == newRecipe._id);
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  deleteRecipe(index: number) {
+  deleteRecipe(id: string) {
+    const index = this.recipes.findIndex(x => x._id == id);
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
   }
