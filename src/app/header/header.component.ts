@@ -16,10 +16,18 @@ export class HeaderComponent {
           console.log(response);
         }
       );
+
+    this.dataStorageService.storeShoppingList()
+        .subscribe(
+            (response: any) => {
+              console.log(response);
+            }
+        );
   }
 
   onFetchData() {
     this.dataStorageService.getRecipes();
+    this.dataStorageService.getShoppingList();
   }
 
 }
