@@ -15,7 +15,7 @@ import {Ingredient} from "./ingredient.model";
 export class DataStorageService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
-    private serverUrl = environment.serverUrl + '/recipes'; // URL to web api
+    private serverUrl = environment.serverUrl + '/recipes/'; // URL to web api
     private shoppingListServerUrl = environment.serverUrl + '/shopping-list/';
 
 
