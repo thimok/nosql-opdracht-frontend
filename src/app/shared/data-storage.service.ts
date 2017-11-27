@@ -79,25 +79,23 @@ export class DataStorageService {
             })
     }
 
-    postShoppingListArray(ingredients: Ingredient[]) {
+           postShoppingListArray(ingredients: Ingredient[]) {
 
-       for (let ingredient of ingredients) {
-           this.http.post(this.shoppingListServerUrl, ingredient)
-               .map(
-                   (response) => {
-                       const shopping_list = response.json();
-                       console.log(shopping_list);
-                       return shopping_list;
-                   }
-               )
-               .subscribe((shopping_list) => {
-                   this.shoppingListService.addIngredients(shopping_list)
-               })
-       }
+             for (let ingredient of ingredients) {
+                this.http.post(this.shoppingListServerUrl, ingredient)
+                    .map(
+                        (response) => {
+                            const shopping_list = response.json();
+                            console.log(shopping_list);
+                            return shopping_list;
+                        }
+                    )
+                    .subscribe((shopping_list) => {
+                        this.shoppingListService.addIngredients(shopping_list)
+                    })
+            }
 
-
-
-    }
+        }
 
     updateShoppingList(ingredient) {
 
