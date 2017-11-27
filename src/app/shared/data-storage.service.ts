@@ -13,7 +13,7 @@ import { Recipe } from '../recipes/recipe.model';
 export class DataStorageService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  private serverUrl = environment.serverUrl + '/recipes'; // URL to web api
+  private serverUrl = environment.serverUrl + '/recipes/'; // URL to web api
 
   constructor(private http: Http, private recipeService: RecipeService) {}
 
@@ -37,6 +37,48 @@ export class DataStorageService {
       .subscribe(
         (recipes: Recipe[]) => {
           this.recipeService.setRecipes(recipes);
+        }
+      );
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.http.post(this.serverUrl, recipe)
+      .map(
+        (response) => {
+          return response.json();
+        }
+      )
+      .subscribe(
+        (recipe: Recipe) => {
+          this.recipeService.addRecipe(recipe);
+        }
+      );
+  }
+
+  updateRecipe(recipe: Recipe) {
+    this.http.put(this.serverUrl + recipe._id, recipe)
+      .map(
+        (response) => {
+          return response.json();
+        }
+      )
+      .subscribe(
+        (recipe: Recipe) => {
+          this.recipeService.updateRecipe(recipe);
+        }
+      );
+  }
+
+  deleteRecipe(id: string) {
+    this.http.delete(this.serverUrl + id)
+      .map(
+        (response) => {
+          return response.json();
+        }
+      )
+      .subscribe(
+        (recipe: Recipe) => {
+          this.recipeService.deleteRecipe(recipe._id);
         }
       );
   }
