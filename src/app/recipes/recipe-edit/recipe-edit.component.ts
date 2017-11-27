@@ -20,10 +20,6 @@ export class RecipeEditComponent implements OnInit {
               private router: Router,
               private dataStorageService: DataStorageService) {
   }
-  
-  get formData() {
-  	return this.recipeForm.get('ingredients');
-  }
 
   ngOnInit() {
     this.route.params
